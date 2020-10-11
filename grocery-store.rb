@@ -15,6 +15,9 @@ def final_price(item, quantity)
             sale_price_quantity = quantity/2
             left_quantity = quantity%2
             final_price = (sale_price_quantity * 5) + (left_quantity * grocery_price_list(item))  
+
+        else
+            final_price = quantity * grocery_price_list(item)
         end
         
     when "bread"
@@ -22,6 +25,9 @@ def final_price(item, quantity)
             sale_price_quantity = quantity/3
             left_quantity = quantity%3
             final_price = (sale_price_quantity * 6) + (left_quantity * grocery_price_list(item))
+        else    print items
+
+            final_price = quantity * grocery_price_list(item)
         end
         
     else 
@@ -33,8 +39,20 @@ end
 def items_purchased
     puts "Please enter all the items purchased separated by a comma"
     items = gets.chomp
-    items = items.split(',').collect{|element| element.strip}.tally
-    print items
+    items = items.split(',').collect{|element| element.strip.downcase}.tally
 end
 
-items_purchased
+
+
+def print_bill
+    items = items_purchased
+    puts 'Item         Quantity        Price'
+    puts'---------------------------------'           
+    items.each{ |item,quantity| 
+    puts "#{item.capitalize}           #{quantity}          $#{final_price(item,quantity)}"
+    }
+end
+
+print_bill
+
+
