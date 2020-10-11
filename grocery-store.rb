@@ -3,11 +3,6 @@ def grocery_price_list(item)
     groceries[item]
 end
 
-# def sale_price(item)
-#     if (item == 'Milk' || item == 'Bread')
-#         grocery_price_list(item)
- 
-#     end
     
 
 
