@@ -42,6 +42,15 @@ def items_purchased
     items = items.split(',').collect{|element| element.strip.downcase}.tally
 end
 
+def money_saved
+    items = items_purchased
+    saved = 0
+    items.each{ |item,quantity|
+        saved += (grocery_price_list(item) * quantity) - final_price(item,quantity)
+    }
+    saved
+end
+
 
 def print_bill
     items = items_purchased
