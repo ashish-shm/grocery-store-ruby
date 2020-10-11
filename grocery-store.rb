@@ -33,8 +33,8 @@ end
 def items_purchased
     puts "Please enter all the items purchased separated by a comma"
     items = gets.chomp
-    items = items.split(',').collect{|element| element.strip}
-    print items
+    items = items.split(',').collect{|element| element.strip}.tally
+    print items.class
 end
 
 items_purchased
