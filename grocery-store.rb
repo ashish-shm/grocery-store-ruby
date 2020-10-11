@@ -59,5 +59,3 @@ def print_bill
 end
 
 print_bill
-
-
