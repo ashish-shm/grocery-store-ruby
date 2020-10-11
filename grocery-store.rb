@@ -14,14 +14,20 @@ def final_price(item, quantity)
         if (quantity > 1)
             sale_price_quantity = quantity/2
             left_quantity = quantity%2
-            final_price = (sale_price_quantity * 5) + (left_quantity * grocery_price_list(item))  
+            final_price = (sale_price_quantity * sale_price(item)) + (left_quantity * grocery_price_list(item))  
+
+        else
+            final_price = quantity * grocery_price_list(item)
         end
         
     when "bread"
         if(quantity > 1)
             sale_price_quantity = quantity/3
             left_quantity = quantity%3
-            final_price = (sale_price_quantity * 6) + (left_quantity * grocery_price_list(item))
+            final_price = (sale_price_quantity * sale_price(item)) + (left_quantity * grocery_price_list(item))
+        else    print items
+
+            final_price = quantity * grocery_price_list(item)
         end
         
     else 
@@ -33,8 +39,25 @@ end
 def items_purchased
     puts "Please enter all the items purchased separated by a comma"
     items = gets.chomp
-    items = items.split(',').collect{|element| element.strip}.tally
-    print items.class
+    items = items.split(',').collect{|element| element.strip.downcase}.tally
 end
 
-items_purchased
+def print_bill
+    items = items_purchased
+    total_price = 0
+    saved = 0
+    puts ' Item         Quantity        Price'
+    puts'--------------------------------------'           
+    items.each{ |item,quantity| 
+    puts "#{item.capitalize}           #{quantity}          $#{final_price(item,quantity).round(2)}"
+    total_price += final_price(item,quantity)
+    saved += (grocery_price_list(item) * quantity) - final_price(item,quantity)
+    }
+    puts "Total Price: $#{total_price.round(2)}"
+    puts "You saved $#{saved.round(2)} today."
+    
+end
+
+print_bill
+
+
