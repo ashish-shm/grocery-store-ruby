@@ -25,21 +25,25 @@ def final_price(item, quantity)
             sale_price_quantity = quantity/3
             left_quantity = quantity%3
             final_price = (sale_price_quantity * sale_price(item)) + (left_quantity * grocery_price_list(item))
-        else    print items
-
+        else
             final_price = quantity * grocery_price_list(item)
-        end
+        end   
         
     else 
-        final_price = (quantity * grocery_price_list(item))
+        final_price = quantity * grocery_price_list(item)
     end
         
 end
 
 def items_purchased
+    available_items = ['apple','banana','bread','milk']
+    items_to_purchase = []
     puts "Please enter all the items purchased separated by a comma"
     items = gets.chomp
-    items = items.split(',').collect{|element| element.strip.downcase}.tally
+    items.split(',').each{|element| 
+        items_to_purchase.push(element) if available_items.include?(element.strip.downcase)
+        puts "#{element} is not present in grocery store" unless available_items.include?(element.strip.downcase) }
+    items_to_purchase.tally
 end
 
 def print_bill
