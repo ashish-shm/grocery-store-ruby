@@ -46,10 +46,10 @@ def print_bill
     items = items_purchased
     total_price = 0
     saved = 0
-    puts ' Item         Quantity        Price'
-    puts'--------------------------------------'           
+    puts "Item\t  Quantity\tPrice"
+    puts'------------------------------------'           
     items.each{ |item,quantity| 
-    puts "#{item.capitalize}           #{quantity}          $#{final_price(item,quantity).round(2)}"
+    puts "#{item.capitalize}\t   #{quantity}\t\t$#{final_price(item,quantity).round(2)}"
     total_price += final_price(item,quantity)
     saved += (grocery_price_list(item) * quantity) - final_price(item,quantity)
     }
